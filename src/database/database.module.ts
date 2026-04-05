@@ -1,0 +1,55 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import {
+  Alumno,
+  AuditoriaLog,
+  Colegio,
+  ConceptoPago,
+  Configuracion,
+  CursoDocente,
+  Curso,
+  Deuda,
+  Docente,
+  Grado,
+  LoginLog,
+  Matricula,
+  Nota,
+  Pago,
+  PagoDetalle,
+  Permiso,
+  Rol,
+  RolPermiso,
+  Seccion,
+  Usuario,
+  UsuarioRol,
+} from './entities';
+
+@Module({
+  imports: [
+    TypeOrmModule.forFeature([
+      Alumno,
+      AuditoriaLog,
+      Colegio,
+      ConceptoPago,
+      Configuracion,
+      CursoDocente,
+      Curso,
+      Deuda,
+      Docente,
+      Grado,
+      LoginLog,
+      Matricula,
+      Nota,
+      Pago,
+      PagoDetalle,
+      Permiso,
+      Rol,
+      RolPermiso,
+      Seccion,
+      Usuario,
+      UsuarioRol,
+    ]),
+  ],
+  exports: [TypeOrmModule],
+})
+export class DatabaseModule {}
