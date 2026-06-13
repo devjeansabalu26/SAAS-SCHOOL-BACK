@@ -7,6 +7,7 @@ import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { AlumnosModule } from './modules/alumnos/alumnos.module';
 import { ColegiosModule } from './modules/colegios/colegios.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { AuthModule } from './modules/auth/auth.module';
         logging: true,
       }),
     }),
+    DatabaseModule,
     AuthModule,
     UsuariosModule,
     AlumnosModule,
