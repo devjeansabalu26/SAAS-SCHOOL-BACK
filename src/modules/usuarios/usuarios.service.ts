@@ -33,6 +33,10 @@ export class UsuariosService {
     return this.repository.findOneBy({ email });
   }
 
+  findByRecoveryToken(token: string) {
+    return this.repository.findOneBy({ tokenRecuperacion: token });
+  }
+
   create(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
     const payload: DeepPartial<Usuario> = {
       ...createUsuarioDto,

@@ -25,7 +25,7 @@ export class CreateUsuarioDto {
     description: 'Email único del usuario',
   })
   @IsEmail()
-  email: string;
+  email!: string;
 
   @ApiProperty({
     example: 'Administrador',
@@ -82,7 +82,7 @@ export class CreateUsuarioDto {
   })
   @IsNotEmpty()
   @IsString()
-  password: string;
+  password!: string;
 
   @ApiProperty({
     example: 0,

@@ -7,7 +7,7 @@ export class RegisterDto {
     description: 'Email único del usuario',
   })
   @IsEmail()
-  email: string;
+  email!: string;
 
   @ApiProperty({
     example: 'Juan Pérez',
@@ -15,7 +15,7 @@ export class RegisterDto {
   })
   @IsNotEmpty()
   @IsString()
-  nombre: string;
+  nombre!: string;
 
   @ApiProperty({
     example: 'password123',
@@ -23,7 +23,7 @@ export class RegisterDto {
   })
   @IsNotEmpty()
   @IsString()
-  password: string;
+  password!: string;
 
   @ApiProperty({
     example: '1',
@@ -33,4 +33,22 @@ export class RegisterDto {
   @IsOptional()
   @IsString()
   tenantId?: string;
+
+  @ApiProperty({
+    example: 'invitado',
+    description: 'Tipo de usuario inicial para nuevo registro',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  tipoUsuario?: string;
+
+  @ApiProperty({
+    example: 'juan.perez',
+    description: 'Nombre de usuario (opcional)',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  username?: string;
 }

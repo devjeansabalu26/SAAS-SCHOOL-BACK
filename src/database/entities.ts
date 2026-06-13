@@ -10,7 +10,7 @@ import {
 @Entity('alumnos')
 export class Alumno {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -55,7 +55,7 @@ export class Alumno {
   estadoAcademico?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -67,7 +67,7 @@ export class Alumno {
 @Entity('auditoria_log')
 export class AuditoriaLog {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -103,13 +103,13 @@ export class AuditoriaLog {
   userAgent?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 }
 
 @Entity('colegios')
 export class Colegio {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ length: 150, nullable: true })
   nombre?: string;
@@ -154,7 +154,7 @@ export class Colegio {
   fechaFinPlan?: Date;
 
   @Column({ default: true })
-  activo: boolean;
+  activo!: boolean;
 
   @Column({ length: 50, nullable: true })
   estado?: string;
@@ -163,7 +163,7 @@ export class Colegio {
   configuracionJson?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -175,7 +175,7 @@ export class Colegio {
 @Entity('conceptos_pago')
 export class ConceptoPago {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -193,7 +193,7 @@ export class ConceptoPago {
   monto?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -202,7 +202,7 @@ export class ConceptoPago {
 @Entity('configuraciones')
 export class Configuracion {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -220,10 +220,10 @@ export class Configuracion {
   descripcion?: string;
 
   @Column({ name: 'es_publico', default: false })
-  esPublico: boolean;
+  esPublico!: boolean;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -232,7 +232,7 @@ export class Configuracion {
 @Entity('curso_docente')
 export class CursoDocente {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'curso_id', type: 'integer', nullable: true })
   cursoId?: number;
@@ -241,13 +241,13 @@ export class CursoDocente {
   docenteId?: number;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 }
 
 @Entity('cursos')
 export class Curso {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -265,7 +265,7 @@ export class Curso {
   nivel?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -274,7 +274,7 @@ export class Curso {
 @Entity('deudas')
 export class Deuda {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -301,7 +301,7 @@ export class Deuda {
   estado?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -310,7 +310,7 @@ export class Deuda {
 @Entity('docentes')
 export class Docente {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -328,13 +328,13 @@ export class Docente {
   telefono?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 }
 
 @Entity('grados')
 export class Grado {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -343,7 +343,7 @@ export class Grado {
   nombre?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -352,13 +352,13 @@ export class Grado {
 @Entity('login_log')
 export class LoginLog {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
 
   @Column({ name: 'usuario_id', type: 'integer' })
-  usuarioId: number;
+  usuarioId!: number;
 
   @Column({ name: 'fecha_login', type: 'timestamp', nullable: true })
   fechaLogin?: Date;
@@ -370,16 +370,16 @@ export class LoginLog {
   userAgent?: string;
 
   @Column({ default: true })
-  exitoso: boolean;
+  exitoso!: boolean;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 }
 
 @Entity('matriculas')
 export class Matricula {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -415,7 +415,7 @@ export class Matricula {
   fechaFin?: Date;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -424,7 +424,7 @@ export class Matricula {
 @Entity('notas')
 export class Nota {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -454,7 +454,7 @@ export class Nota {
   periodo?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -463,7 +463,7 @@ export class Nota {
 @Entity('pagos')
 export class Pago {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -487,7 +487,7 @@ export class Pago {
   estado?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -496,7 +496,7 @@ export class Pago {
 @Entity('pagos_detalle')
 export class PagoDetalle {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'pago_id', type: 'integer', nullable: true })
   pagoId?: number;
@@ -508,13 +508,13 @@ export class PagoDetalle {
   montoPagado?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 }
 
 @Entity('permisos')
 export class Permiso {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ length: 100, nullable: true })
   codigo?: string;
@@ -529,7 +529,7 @@ export class Permiso {
   descripcion?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -538,7 +538,7 @@ export class Permiso {
 @Entity('roles')
 export class Rol {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -553,10 +553,10 @@ export class Rol {
   descripcion?: string;
 
   @Column({ name: 'es_sistema', default: false })
-  esSistema: boolean;
+  esSistema!: boolean;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -565,7 +565,7 @@ export class Rol {
 @Entity('roles_permisos')
 export class RolPermiso {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'rol_id', type: 'integer', nullable: true })
   rolId?: number;
@@ -574,13 +574,13 @@ export class RolPermiso {
   permisoId?: number;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 }
 
 @Entity('secciones')
 export class Seccion {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'grado_id', type: 'integer', nullable: true })
   gradoId?: number;
@@ -589,7 +589,7 @@ export class Seccion {
   nombre?: string;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -598,7 +598,7 @@ export class Seccion {
 @Entity('usuarios')
 export class Usuario {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'tenant_id', type: 'integer', nullable: true })
   tenantId?: number;
@@ -607,7 +607,7 @@ export class Usuario {
   username?: string;
 
   @Column({ length: 150, nullable: true })
-  email: string;
+  email!: string;
 
   @Column({ name: 'password_hash', type: 'text', nullable: true })
   password?: string;
@@ -634,13 +634,13 @@ export class Usuario {
   fotoUrl?: string;
 
   @Column({ name: 'intentos_fallidos', type: 'integer', default: 0 })
-  intentosFallidos: number;
+  intentosFallidos!: number;
 
   @Column({ default: false })
-  bloqueado: boolean;
+  bloqueado!: boolean;
 
   @Column({ name: 'email_verificado', default: false })
-  emailVerificado: boolean;
+  emailVerificado!: boolean;
 
   @Column({ name: 'token_recuperacion', type: 'text', nullable: true })
   tokenRecuperacion?: string;
@@ -655,7 +655,7 @@ export class Usuario {
   ultimoLogin?: Date;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
@@ -667,7 +667,7 @@ export class Usuario {
 @Entity('usuarios_roles')
 export class UsuarioRol {
   @PrimaryColumn({ type: 'integer' })
-  id: number;
+  id!: number;
 
   @Column({ name: 'usuario_id', type: 'integer', nullable: true })
   usuarioId?: number;
@@ -676,5 +676,5 @@ export class UsuarioRol {
   rolId?: number;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt!: Date;
 }
