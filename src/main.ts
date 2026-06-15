@@ -1,84 +1,136 @@
 import { NestFactory } from '@nestjs/core';
-import { SwaggerModule, DocumentBuilder, SwaggerCustomOptions } from '@nestjs/swagger';
+import {
+  ValidationPipe,
+  Logger,
+} from '@nestjs/common';
+import {
+  SwaggerModule,
+  DocumentBuilder,
+  SwaggerCustomOptions,
+} from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
+import helmet from 'helmet';
+
 import { AppModule } from './app.module';
-import { ValidationPipe, Logger } from '@nestjs/common';
+
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { AuthenticationLoggingInterceptor } from './common/interceptors/authentication-logging.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   const logger = new Logger('Bootstrap');
 
+  const configService = app.get(ConfigService);
+
+  app.use(
+    helmet({
+      crossOriginResourcePolicy: false,
+    }),
+  );
+
+
+  app.setGlobalPrefix('api');
+
   app.enableCors({
-    origin: ['http://localhost:4200', 'http://127.0.0.1:4200'],
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
+    origin: [
+      configService.get<string>('FRONTEND_URL') ||
+        'http://localhost:4200',
+    ],
     credentials: true,
+    methods: [
+      'GET',
+      'POST',
+      'PUT',
+      'PATCH',
+      'DELETE',
+      'OPTIONS',
+    ],
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'Accept',
+      'X-Requested-With',
+    ],
   });
 
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+      stopAtFirstError: true,
+    }),
+  );
+
   app.useGlobalInterceptors(
     new LoggingInterceptor(),
     new AuthenticationLoggingInterceptor(),
   );
 
-  // Configurar Swagger
-  const config = new DocumentBuilder()
-    .setTitle('SaaS Colegio API')
-    .setDescription('API de gestión de colegio - Sistema SaaS')
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('SaaS School API')
+    .setDescription(
+      'API Multi-Tenant para gestión escolar',
+    )
     .setVersion('1.0.0')
     .addBearerAuth(
       {
         type: 'http',
         scheme: 'bearer',
         bearerFormat: 'JWT',
-        description: 'Token JWT obtenido en /auth/login. Ejemplo: Bearer eyJhbGci...',
       },
       'Bearer',
     )
-    .addTag('Auth', 'Autenticación y autorización')
-    .addTag('Usuarios', 'Gestión de usuarios')
-    .addTag('Alumnos', 'Gestión de alumnos')
-    .addTag('Colegios', 'Gestión de colegios')
-    .addTag('Health', 'Verificación de estado del servidor')
-    .setContact(
-      'Soporte SaaS Colegio',
-      'https://saascolegio.com',
-      'soporte@saascolegio.com',
-    )
-    .setLicense(
-      'Proprietary',
-      'https://saascolegio.com/license',
-    )
-    .addServer(
-      `http://localhost:${process.env.PORT || 3000}`,
-      'Servidor local',
-    )
+    .addTag('Auth')
+    .addTag('Usuarios')
+    .addTag('Alumnos')
+    .addTag('Colegios')
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
-  
+  const document = SwaggerModule.createDocument(
+    app,
+    swaggerConfig,
+  );
+
   const swaggerOptions: SwaggerCustomOptions = {
     swaggerOptions: {
       persistAuthorization: true,
-      tagsSorter: 'alpha',
-      operationsSorter: 'alpha',
       displayRequestDuration: true,
       filter: true,
+      tagsSorter: 'alpha',
+      operationsSorter: 'alpha',
     },
+    customSiteTitle: 'SaaS School API',
     customCss: `
-      .topbar { display: none; }
-      .swagger-ui .auth-wrapper { padding: 20px; background: #f5f5f5; }
+      .topbar{
+        display:none;
+      }
     `,
   };
-  
-  SwaggerModule.setup('api/docs', app, document, swaggerOptions);
 
-  const port = process.env.PORT ?? 3000;
+  SwaggerModule.setup(
+    'api/docs',
+    app,
+    document,
+    swaggerOptions,
+  );
+
+  const port =
+    configService.get<number>('PORT') || 3000;
+
   await app.listen(port);
-  
-  logger.log(`✅ Servidor ejecutándose en: http://localhost:${port}`);
-  logger.log(`📚 Documentación Swagger: http://localhost:${port}/api/docs`);
-  logger.log(`🔐 JWT Secret configurado: ${!!process.env.JWT_SECRET}`);
+
+  logger.log(
+    `🚀 API ejecutándose en http://localhost:${port}/api`,
+  );
+
+  logger.log(
+    `📚 Swagger: http://localhost:${port}/api/docs`,
+  );
 }
+
 bootstrap();
