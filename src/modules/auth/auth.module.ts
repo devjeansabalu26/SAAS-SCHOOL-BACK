@@ -1,15 +1,16 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { AuthController } from './controllers/auth.controller';
+
+import { MailService } from 'src/common/mail/mail.service';
 import { AuthService } from './services/auth.service';
-import { AuthController } from './auth.controller';
+import { DatabaseModule } from 'src/database/database.module';
+import { jwtConstants } from './auth.constants';
+import { UsuariosService } from 'src/modules/usuarios/usuarios.service';
+import { LoginLogService } from './login-log.service';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { jwtConstants } from './auth.constants';
-import { UsuariosService } from '../usuarios/usuarios.service';
-import { LoginLogService } from './login-log.service';
-import { DatabaseModule } from '../../database/database.module';
-import { MailService } from 'src/common/mail/mail.service';
 
 @Module({
   imports: [

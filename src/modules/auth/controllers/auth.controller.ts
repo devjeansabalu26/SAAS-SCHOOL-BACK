@@ -15,17 +15,17 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../services/auth.service';
 
-import { LoginDto } from './dto/login.dto';
-import { RegisterDto } from './dto/register.dto';
-import { RefreshTokenDto } from './dto/refresh-token.dto';
-import { ForgotPasswordDto } from './dto/forgot-password.dto';
-import { ResetPasswordDto } from './dto/reset-password.dto';
+import { LoginDto } from '../dto/login.dto';
+import { RegisterDto } from '../dto/register.dto';
+import { RefreshTokenDto } from '../dto/refresh-token.dto';
+import { ForgotPasswordDto } from '../dto/forgot-password.dto';
+import { ResetPasswordDto } from '../dto/reset-password.dto';
 
-import { LocalAuthGuard } from './guards/local-auth.guard';
-import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
-import { VerifyCodeDto } from './dto/verify-code.dto';
+import { LocalAuthGuard } from '../guards/local-auth.guard';
+import { JwtAuthGuard } from '../../../common/guards/jwt-auth.guard';
+import { VerifyCodeDto } from '../dto/verify-code.dto';
 
 @ApiTags('Auth')
 @Controller('auth')

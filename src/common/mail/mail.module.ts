@@ -8,7 +8,7 @@ import { JwtStrategy } from 'src/modules/auth/strategies/jwt.strategy';
 import { LocalStrategy } from 'src/modules/auth/strategies/local.strategy';
 import { UsuariosService } from 'src/modules/usuarios/usuarios.service';
 import { MailService } from './mail.service';
-import { AuthController } from 'src/modules/auth/auth.controller';
+import { AuthController } from 'src/modules/auth/controllers/auth.controller';
 import { jwtConstants } from 'src/modules/auth/auth.constants';
 import { DatabaseModule } from 'src/database/database.module';
 

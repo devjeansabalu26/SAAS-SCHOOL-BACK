@@ -12,9 +12,10 @@ import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
 
 import { AppModule } from './app.module';
-
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { AuthenticationLoggingInterceptor } from './common/interceptors/authentication-logging.interceptor';
+import { ResponseInterceptor } from './common/interceptors/response.interceptor';
+import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -30,7 +31,11 @@ async function bootstrap() {
   );
 
 
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api', {
+    exclude: [
+      'auth/(.*)',
+    ],
+  });
 
   app.enableCors({
     origin: [
@@ -67,8 +72,13 @@ async function bootstrap() {
   );
 
   app.useGlobalInterceptors(
+    new ResponseInterceptor(),
     new LoggingInterceptor(),
     new AuthenticationLoggingInterceptor(),
+  );
+
+  app.useGlobalFilters(
+    new GlobalExceptionFilter(),
   );
 
   const swaggerConfig = new DocumentBuilder()
